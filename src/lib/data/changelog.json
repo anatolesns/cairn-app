@@ -3,15 +3,15 @@
 		"version": "1.2.0",
 		"date": "",
 		"summary": {
-			"en": "The title bar becomes yours on Linux and Windows: keep the system's, swap it for one in the colour you choose, or hide it.",
-			"fr": "La barre de titre vous appartient sous Linux et Windows : gardez celle du système, remplacez-la par une barre à la couleur de votre choix, ou masquez-la."
+			"en": "The title bar becomes yours on Linux and Windows: keep the system's, or swap it for one that takes the theme, the accent, the project's colour or your own.",
+			"fr": "La barre de titre vous appartient sous Linux et Windows : gardez celle du système, ou remplacez-la par une barre aux couleurs du thème, de l'accent, du projet ou de votre choix."
 		},
 		"changes": [
 			{
 				"kind": "added",
 				"text": {
-					"en": "On Linux and Windows, the Appearance settings choose the title bar: the system's, one drawn by Cairn in a colour of your own, or none at all with only the window buttons left.",
-					"fr": "Sous Linux et Windows, les réglages d'apparence choisissent la barre de titre : celle du système, une barre dessinée par Cairn à la couleur de votre choix, ou aucune, avec seulement les boutons de fenêtre."
+					"en": "On Linux and Windows, the Appearance settings choose the title bar: the system's, or one drawn by Cairn whose colour follows the theme, the accent, the open project or one of your own.",
+					"fr": "Sous Linux et Windows, les réglages d'apparence choisissent la barre de titre : celle du système, ou une barre dessinée par Cairn dont la couleur suit le thème, l'accent, le projet ouvert ou votre choix."
 				}
 			},
 			{
