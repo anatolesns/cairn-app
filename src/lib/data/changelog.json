@@ -1,29 +1,5 @@
 [
 	{
-		"version": "1.2.0",
-		"date": "",
-		"summary": {
-			"en": "The title bar becomes yours on Linux and Windows: keep the system's, or swap it for one that takes the theme, the accent, the project's colour or your own.",
-			"fr": "La barre de titre vous appartient sous Linux et Windows : gardez celle du système, ou remplacez-la par une barre aux couleurs du thème, de l'accent, du projet ou de votre choix."
-		},
-		"changes": [
-			{
-				"kind": "added",
-				"text": {
-					"en": "On Linux and Windows, the Appearance settings choose the title bar: the system's, or one drawn by Cairn whose colour follows the theme, the accent, the open project or one of your own.",
-					"fr": "Sous Linux et Windows, les réglages d'apparence choisissent la barre de titre : celle du système, ou une barre dessinée par Cairn dont la couleur suit le thème, l'accent, le projet ouvert ou votre choix."
-				}
-			},
-			{
-				"kind": "fixed",
-				"text": {
-					"en": "On a short window or a high interface scale, the bottom of the home screen and of the settings is no longer cut off out of reach: the sidebar scrolls on its own.",
-					"fr": "Sur une fenêtre peu haute ou avec une échelle d'interface élevée, le bas de l'accueil et des réglages n'est plus coupé hors d'atteinte : la barre latérale défile d'elle-même."
-				}
-			}
-		]
-	},
-	{
 		"version": "1.1.0",
 		"date": "2026-10-01",
 		"summary": {
