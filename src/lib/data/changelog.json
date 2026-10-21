@@ -1,5 +1,22 @@
 [
 	{
+		"version": "1.2.1",
+		"date": "",
+		"summary": {
+			"en": "The branch of the main folder can be renamed.",
+			"fr": "La branche du dossier principal peut être renommée."
+		},
+		"changes": [
+			{
+				"kind": "changed",
+				"text": {
+					"en": "The branch checked out in a project's main folder can now be renamed from the Branches tab. A branch an instance works on stays locked, and the checked-out branch still cannot be deleted.",
+					"fr": "La branche extraite dans le dossier principal d'un projet peut maintenant être renommée depuis l'onglet Branches. Une branche sur laquelle travaille une instance reste verrouillée, et la branche extraite ne peut toujours pas être supprimée."
+				}
+			}
+		]
+	},
+	{
 		"version": "1.2.0",
 		"date": "2026-11-23",
 		"summary": {
