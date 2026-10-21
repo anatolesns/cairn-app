@@ -1868,7 +1868,7 @@ export const en = {
 			remote: "Remote",
 			none: "No branch",
 			current: "current",
-			isCurrent: "The branch checked out here cannot be renamed or deleted",
+			isCurrent: "The branch checked out here cannot be deleted",
 			usedByInstance: (id: string) =>
 				`Used by the instance ${id}: rename or delete it from there`,
 			rename: "Rename branch",

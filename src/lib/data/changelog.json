@@ -8,6 +8,13 @@
 		},
 		"changes": [
 			{
+				"kind": "changed",
+				"text": {
+					"en": "The branch checked out in a project's main folder can now be renamed from the Branches tab. A branch an instance works on stays locked, and the checked-out branch still cannot be deleted.",
+					"fr": "La branche extraite dans le dossier principal d'un projet peut maintenant être renommée depuis l'onglet Branches. Une branche sur laquelle travaille une instance reste verrouillée, et la branche extraite ne peut toujours pas être supprimée."
+				}
+			},
+			{
 				"kind": "fixed",
 				"text": {
 					"en": "F11 now toggles fullscreen from the home screen right after launch, without having to open a project first, and also works in detached editor windows.",

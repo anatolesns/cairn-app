@@ -1900,8 +1900,7 @@ export const fr = {
 			remote: "Distantes",
 			none: "Aucune branche",
 			current: "courante",
-			isCurrent:
-				"La branche extraite ici ne peut être ni renommée ni supprimée",
+			isCurrent: "La branche extraite ici ne peut pas être supprimée",
 			usedByInstance: (id: string) =>
 				`Utilisée par l'instance ${id} : renommez-la ou supprimez-la depuis celle-ci`,
 			rename: "Renommer la branche",

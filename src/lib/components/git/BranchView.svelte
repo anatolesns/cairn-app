@@ -77,11 +77,15 @@
     return { remote, branch: ref.slice(remote.length + 1) };
   }
 
-  /** Why a local branch cannot be renamed or deleted from here, if it cannot. */
-  function lockReason(branch: string): string | null {
+  /**
+   * Why a local branch cannot be renamed or deleted from here, if it cannot. A branch
+   * an instance works on is left to that instance; git renames the checked-out branch
+   * but refuses to delete it.
+   */
+  function lockReason(branch: string, action: 'rename' | 'delete'): string | null {
     const owner = branchOwner.get(branch);
     if (owner) return (t('git.branchList.usedByInstance') as (id: string) => string)(owner.ticket.id);
-    if (branch === currentBranch) return t('git.branchList.isCurrent') as string;
+    if (action === 'delete' && branch === currentBranch) return t('git.branchList.isCurrent') as string;
     return null;
   }
 
@@ -95,13 +99,13 @@
   async function openRename(branch: string) {
     renameFrom = branch;
     renameTo = branch;
-    renameError = lockReason(branch) ?? '';
+    renameError = lockReason(branch, 'rename') ?? '';
     await tick();
     renameInput?.select();
   }
 
   async function confirmRename() {
-    if (!renameFrom || isRenaming || lockReason(renameFrom)) return;
+    if (!renameFrom || isRenaming || lockReason(renameFrom, 'rename')) return;
     const to = renameTo.trim();
     if (!to || to === renameFrom) return;
     isRenaming = true;
@@ -171,7 +175,7 @@
       .filter(r => r.branch === branch)
       .map(r => r.remote);
     deleteOnRemotes = isRemoteRef ? [splitRemoteBranch(name).remote] : [];
-    deleteError = hasLocal ? (lockReason(branch) ?? '') : '';
+    deleteError = hasLocal ? (lockReason(branch, 'delete') ?? '') : '';
     isNotMerged = false;
   }
 
@@ -181,7 +185,7 @@
       : deleteOnRemotes.filter(r => r !== remote);
   }
 
-  $: deleteBlocked = !!deleteName && deleteLocal && !!lockReason(deleteName);
+  $: deleteBlocked = !!deleteName && deleteLocal && !!lockReason(deleteName, 'delete');
   $: canDelete = !!deleteName && !deleteBlocked && (deleteLocal || deleteOnRemotes.length > 0);
 
   async function confirmDelete() {
@@ -302,7 +306,7 @@
   </div>
   {#each localBranches as branch (branch)}
     {@const owner = branchOwner.get(branch)}
-    {@const locked = lockReason(branch)}
+    {@const renameLocked = lockReason(branch, 'rename')}
     <div class="br-item">
       <span class="br-icon" class:is-current={branch === currentBranch}><Icon name="branch" size={10}/></span>
       <span class="br-name selectable">{branch}</span>
@@ -315,9 +319,9 @@
       <div class="br-actions">
         <button
           class="br-action-btn icon-only"
-          title={locked ?? t('git.branchList.rename') as string}
+          title={renameLocked ?? t('git.branchList.rename') as string}
           aria-label={t('git.branchList.rename') as string}
-          disabled={!!locked}
+          disabled={!!renameLocked}
           on:click={() => openRename(branch)}
         >
           <Icon name="edit" size={11}/>
@@ -433,7 +437,7 @@
         <button class="btn ghost" disabled={isRenaming} on:click={closeAll}>{t('common.cancel')}</button>
         <button
           class="btn primary"
-          disabled={isRenaming || !renameTo.trim() || renameTo.trim() === renameFrom || !!lockReason(renameFrom)}
+          disabled={isRenaming || !renameTo.trim() || renameTo.trim() === renameFrom || !!lockReason(renameFrom, 'rename')}
           on:click={confirmRename}
         >
           {#if isRenaming}<Spinner size={11}/>{:else}{t('git.branchList.renameAction')}{/if}
