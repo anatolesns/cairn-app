@@ -1,5 +1,22 @@
 [
 	{
+		"version": "1.1.2",
+		"date": "",
+		"summary": {
+			"en": "Opening a file from a diff lands on the lines you were reading.",
+			"fr": "Ouvrir un fichier depuis un diff mène aux lignes que vous lisiez."
+		},
+		"changes": [
+			{
+				"kind": "fixed",
+				"text": {
+					"en": "In the Git view, the open-in-editor button of a changed, staged, committed or stashed file now opens it at the diff lines you were reading, instead of where the file was last left. A file whose diff is too large to show opens at its first change.",
+					"fr": "Dans la vue Git, le bouton d'ouverture dans l'éditeur d'un fichier modifié, indexé, commité ou remisé l'ouvre maintenant aux lignes du diff que vous lisiez, et non plus là où le fichier avait été laissé. Un fichier dont le diff est trop gros pour être affiché s'ouvre à sa première modification."
+				}
+			}
+		]
+	},
+	{
 		"version": "1.1.1",
 		"date": "2026-10-18",
 		"summary": {

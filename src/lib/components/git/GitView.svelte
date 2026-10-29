@@ -80,6 +80,7 @@
   import { activeStep, pendingGitAction, gitLeftTab, type GitLeftTab } from '$lib/stores/ui';
   import { currentProjectViewState, updateProjectViewState } from '$lib/stores/view-state';
   import { hashHunks } from '$lib/utils/git/diff-hash';
+  import { diffOpenLine } from '$lib/utils/git/diff-open-line';
   import { getGitCollapseState, saveGitCollapseState } from '$lib/services/git-collapse-state-service';
   import { getCommitState, saveCommitState } from '$lib/services/commit-state-service';
   import { getProjectGitProfile, setProjectGitProfile } from '$lib/services/project-service';
@@ -90,7 +91,12 @@
   import { SEARCH_DEBOUNCE_MS } from '$lib/utils/timing';
   import { errorMessage } from '$lib/utils/error-message';
 
-  const dispatch = createEventDispatcher<{ openFile: string; goGitSettings: void; fileDiscarded: string; filesChanged: void; createInstanceFromRef: string }>();
+  const dispatch = createEventDispatcher<{ openFile: { path: string; line: number | null }; goGitSettings: void; fileDiscarded: string; filesChanged: void; createInstanceFromRef: string }>();
+
+  function openFromCard(button: EventTarget | null, file: { filePath: string; hunks: GitDiffHunk[] }) {
+    const card = button instanceof Element ? button.closest('.hunk-card') : null;
+    dispatch('openFile', { path: file.filePath, line: diffOpenLine(card, file.hunks) });
+  }
 
   function goToGitSettings() {
     pendingGitAction.set('createProfile');
@@ -1718,7 +1724,7 @@
                   </span>
                 {/if}
                 {#if h.status !== 'deleted'}
-                  <button class="open-file-btn" title={h.filePath} on:click={() => dispatch('openFile', h.filePath)}>
+                  <button class="open-file-btn" title={h.filePath} on:click={(e) => openFromCard(e.currentTarget, h)}>
                     <Icon name="external" size={12}/>
                   </button>
                 {/if}
@@ -1858,7 +1864,7 @@
       <BranchView request={branchRequest} on:requestHandled={() => (branchRequest = null)} />
     {:else if $gitLeftTab === 'mergerebase'}
       <MergeRebaseView
-        on:openFile={(e) => dispatch('openFile', e.detail)}
+        on:openFile={(e) => dispatch('openFile', { path: e.detail, line: null })}
         on:filesChanged={() => dispatch('filesChanged')}
       />
     {:else if $gitLeftTab === 'gitignore'}
@@ -1936,7 +1942,7 @@
                   </span>
                 {/if}
                 {#if card.status !== 'staged-deleted'}
-                  <button class="open-file-btn" title={card.filePath} on:click={() => dispatch('openFile', card.filePath)}>
+                  <button class="open-file-btn" title={card.filePath} on:click={(e) => openFromCard(e.currentTarget, card)}>
                     <Icon name="external" size={12}/>
                   </button>
                 {/if}
@@ -2070,7 +2076,7 @@
                   </span>
                 {/if}
                 {#if card.status !== 'staged-deleted'}
-                  <button class="open-file-btn" title={card.filePath} on:click={() => dispatch('openFile', card.filePath)}>
+                  <button class="open-file-btn" title={card.filePath} on:click={(e) => openFromCard(e.currentTarget, card)}>
                     <Icon name="external" size={12}/>
                   </button>
                 {/if}
@@ -2161,7 +2167,7 @@
                   </span>
                 {/if}
                 {#if h.status !== 'staged-deleted'}
-                  <button class="open-file-btn" title={h.filePath} on:click={() => dispatch('openFile', h.filePath)}>
+                  <button class="open-file-btn" title={h.filePath} on:click={(e) => openFromCard(e.currentTarget, h)}>
                     <Icon name="external" size={12}/>
                   </button>
                 {/if}

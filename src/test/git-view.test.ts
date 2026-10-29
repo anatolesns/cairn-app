@@ -350,7 +350,7 @@ describe("GitView", () => {
 			await userEvent.click(
 				cardFor("a.ts").querySelector(".open-file-btn") as HTMLElement,
 			);
-			expect(onOpenFile).toHaveBeenCalledWith("src/a.ts");
+			expect(onOpenFile).toHaveBeenCalledWith({ path: "src/a.ts", line: 1 });
 		});
 
 		/** An untracked file is rendered as a whole-file addition. */

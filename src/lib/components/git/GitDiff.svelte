@@ -23,6 +23,7 @@
   import { activeSyntaxTokens, settings } from '$lib/stores/settings';
   import { createEventDispatcher } from 'svelte';
   import { isDiffTooLarge } from '$lib/utils/git/diff-size';
+  import { firstChangedLine } from '$lib/utils/git/diff-open-line';
   import Icon from '$lib/components/Icon.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
   import { recallExpansion, rememberExpansion } from '$lib/utils/git/diff-expansion-memory';
@@ -46,7 +47,7 @@
   /** Tells apart two diffs that share a side, path and hunk shapes but not their content, such as stash@{0} before and after a new stash. */
   export let memoryScope = '';
 
-  const dispatch = createEventDispatcher<{ openFile: string }>();
+  const dispatch = createEventDispatcher<{ openFile: { path: string; line: number | null } }>();
 
   $: isTooLarge = isDiffTooLarge(hunks, $settings.gitMaxDiffLines);
 
@@ -230,7 +231,7 @@
 {#if isTooLarge}
 <div class="diff-too-large">
   <span>{t('git.diffTooLarge')}</span>
-  <button class="diff-open" on:click={() => dispatch('openFile', filePath)}>
+  <button class="diff-open" on:click={() => dispatch('openFile', { path: filePath, line: firstChangedLine(hunks) })}>
     <Icon name="external" size={12}/>
     {t('git.openInEditor')}
   </button>
@@ -259,7 +260,7 @@
         </span>
       </div>
     {:else}
-      <div class="diff-row diff-{row.kind}">
+      <div class="diff-row diff-{row.kind}" data-line={row.newNo}>
         <span class="gutter">{row.oldNo ?? ''}</span>
         <span class="gutter">{row.newNo ?? ''}</span>
         <span class="sign">{row.kind === 'add' ? '+' : row.kind === 'remove' ? '-' : ''}</span>
