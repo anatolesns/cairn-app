@@ -135,7 +135,8 @@ fn default_shell() -> String {
 /// environment and PATH. The argv travels as the shell's positional parameters and
 /// `exec` replaces the shell: nothing is quoted, nothing stays between the PTY and
 /// the CLI. Shells with another syntax (and Windows) get the binary directly.
-fn agent_command(binary: &std::path::Path, rest: &[String]) -> CommandBuilder {
+pub fn agent_argv(binary: &std::path::Path, rest: &[String]) -> Vec<String> {
+    let mut argv: Vec<String> = Vec::new();
     #[cfg(not(windows))]
     {
         let shell = default_shell();
@@ -150,18 +151,21 @@ fn agent_command(binary: &std::path::Path, rest: &[String]) -> CommandBuilder {
             _ => Some("exec \"$@\""),
         };
         if let Some(script) = script {
-            let mut cmd = CommandBuilder::new(shell);
-            cmd.args(["-lic", script]);
+            argv.extend([shell, "-lic".to_string(), script.to_string()]);
             if name != "fish" {
-                cmd.arg("cairn-agent");
+                argv.push("cairn-agent".to_string());
             }
-            cmd.arg(binary);
-            cmd.args(rest);
-            return cmd;
         }
     }
-    let mut cmd = CommandBuilder::new(binary);
-    cmd.args(rest);
+    argv.push(binary.to_string_lossy().into_owned());
+    argv.extend(rest.iter().cloned());
+    argv
+}
+
+fn agent_command(binary: &std::path::Path, rest: &[String]) -> CommandBuilder {
+    let argv = agent_argv(binary, rest);
+    let mut cmd = CommandBuilder::new(&argv[0]);
+    cmd.args(&argv[1..]);
     cmd
 }
 

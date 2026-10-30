@@ -1,5 +1,22 @@
 [
 	{
+		"version": "1.1.2",
+		"date": "",
+		"summary": {
+			"en": "A conversation can leave the app for the system terminal.",
+			"fr": "Une conversation peut quitter l'application pour le terminal du système."
+		},
+		"changes": [
+			{
+				"kind": "added",
+				"text": {
+					"en": "On Linux, a terminal button in the conversation header continues the open conversation in the system terminal: the embedded CLI is stopped and the same session is resumed outside, in the same worktree, as a new tab of the terminal window already open when the emulator supports it. It appears once the CLI has saved the session; a CLI still running a command asks for confirmation first.",
+					"fr": "Sous Linux, un bouton terminal dans l'en-tête de la conversation la poursuit dans le terminal du système : le CLI intégré est arrêté et la même session reprise à l'extérieur, dans le même worktree, dans un nouvel onglet de la fenêtre de terminal déjà ouverte quand l'émulateur le permet. Il apparaît dès que le CLI a enregistré la session ; un CLI encore en train d'exécuter une commande demande d'abord confirmation."
+				}
+			}
+		]
+	},
+	{
 		"version": "1.1.1",
 		"date": "2026-10-18",
 		"summary": {
