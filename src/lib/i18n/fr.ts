@@ -1837,6 +1837,7 @@ export const fr = {
 		commitBodyPlaceholder:
 			"Ajouter une description plus longue (facultatif)...",
 		commitBodyLabel: "Description du commit",
+		clearCommitMessage: "Effacer le message et la description",
 		noDiffPreview: "Pas d'aperçu disponible (fichier binaire ou vide).",
 		diffTooLarge: "Ce fichier est trop volumineux pour afficher son diff ici.",
 		openInEditor: "Ouvrir dans l'éditeur",

@@ -1109,6 +1109,17 @@
    * scrolls. Called on input and whenever the value changes from elsewhere -
    * a generated message, or switching worktree - since neither fires `input`.
    */
+  // The fields are written by hand: the store sync skips a focused field, and the
+  // title takes the focus right after.
+  function clearCommitDraft() {
+    setCommitMessage('');
+    setCommitBody('');
+    commitTitleEl.value = '';
+    commitBodyEl.value = '';
+    resizeCommitBody();
+    commitTitleEl.focus();
+  }
+
   function resizeCommitBody() {
     if (!commitBodyEl) return;
     commitBodyEl.style.height = 'auto';
@@ -2251,6 +2262,15 @@
           {/if}
         {/if}
         <button
+          class="clear-draft-btn"
+          title={t('git.clearCommitMessage') as string}
+          aria-label={t('git.clearCommitMessage') as string}
+          disabled={generating || isCommitting || isPushing || (!$commitDraft.message && !$commitDraft.body)}
+          on:click={clearCommitDraft}
+        >
+          <Icon name="trash" size={11}/>
+        </button>
+        <button
           class="options-btn"
           class:active={showOptions}
           title={t('git.commitOptions') as string}
@@ -3321,7 +3341,7 @@
 
   .spacer { flex: 1; }
 
-  .options-btn {
+  .options-btn, .clear-draft-btn {
     position: relative;
     display: flex;
     align-items: center;
@@ -3335,7 +3355,8 @@
     cursor: pointer;
     transition: background .1s, border-color .1s, color .1s;
   }
-  .options-btn:hover, .options-btn.active {
+  .clear-draft-btn:disabled { opacity: 0.4; cursor: default; }
+  .options-btn:hover, .options-btn.active, .clear-draft-btn:hover:not(:disabled) {
     background: var(--bg-4);
     border-color: var(--stroke-1);
     color: var(--fg-0);

@@ -1807,6 +1807,7 @@ export const en = {
 		commitPlaceholder: "feat(scope): describe your change",
 		commitBodyPlaceholder: "Add an optional longer description...",
 		commitBodyLabel: "Commit description",
+		clearCommitMessage: "Clear the message and description",
 		noDiffPreview: "No preview available (binary or empty file).",
 		diffTooLarge: "This file is too large to show its diff here.",
 		openInEditor: "Open in editor",

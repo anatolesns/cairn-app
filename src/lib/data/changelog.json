@@ -1,5 +1,22 @@
 [
 	{
+		"version": "1.1.2",
+		"date": "",
+		"summary": {
+			"en": "The commit message can be cleared in one click.",
+			"fr": "Le message de commit s'efface en un clic."
+		},
+		"changes": [
+			{
+				"kind": "added",
+				"text": {
+					"en": "A trash button beside the commit options clears the commit message and its description in one click, and puts the cursor back in the message.",
+					"fr": "Un bouton corbeille à côté des options de commit efface le message de commit et sa description en un clic, et remet le curseur dans le message."
+				}
+			}
+		]
+	},
+	{
 		"version": "1.1.1",
 		"date": "2026-10-18",
 		"summary": {
