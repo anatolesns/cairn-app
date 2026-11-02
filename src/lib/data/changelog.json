@@ -1,5 +1,22 @@
 [
 	{
+		"version": "1.1.2",
+		"date": "",
+		"summary": {
+			"en": "The Git view lists the tests after the files they cover.",
+			"fr": "La vue Git place les tests après les fichiers qu'ils couvrent."
+		},
+		"changes": [
+			{
+				"kind": "changed",
+				"text": {
+					"en": "In the Git view, the changed and staged files list the tests after the other files, so a change and its test no longer interleave.",
+					"fr": "Dans la vue Git, les fichiers modifiés et indexés placent les tests après les autres fichiers, pour qu'une modification et son test ne s'entremêlent plus."
+				}
+			}
+		]
+	},
+	{
 		"version": "1.1.1",
 		"date": "2026-10-18",
 		"summary": {

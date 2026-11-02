@@ -328,6 +328,13 @@ describe("GitView", () => {
 			expect(cardNames()).toEqual(["a.ts", "z.ts"]);
 		});
 
+		it("lists the test files after the others", async () => {
+			setGit({ unstagedDiffs: [diff("src/a.test.ts"), diff("src/b.ts")] });
+			mount();
+			await settle();
+			expect(cardNames()).toEqual(["b.ts", "a.test.ts"]);
+		});
+
 		it("counts the added and removed lines of a file", async () => {
 			setGit({ unstagedDiffs: [diff("src/a.ts", 3, 2)] });
 			mount();
