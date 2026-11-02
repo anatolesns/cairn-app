@@ -82,6 +82,7 @@
   import { activeStep, pendingGitAction, gitLeftTab, type GitLeftTab } from '#lib/stores/ui';
   import { currentProjectViewState, updateProjectViewState } from '#lib/stores/view-state';
   import { hashHunks } from '#lib/utils/git/diff-hash';
+  import { compareChangedFiles } from '#lib/utils/git/file-order';
   import { getGitCollapseState, saveGitCollapseState } from '#lib/services/git-collapse-state-service';
   import { getCommitState, saveCommitState } from '#lib/services/commit-state-service';
   import { AiAssistError, runOneShotShaped } from '#lib/services/ai-assist-service';
@@ -280,8 +281,7 @@
 
   /* A diff the store hands back unchanged keeps its card: the store only
      replaces the arrays when the diffs moved, so identity is the whole check. */
-  const compareCards = (a: FileCard, b: FileCard) =>
-    a.basename.localeCompare(b.basename) || a.filePath.localeCompare(b.filePath);
+  const compareCards = (a: FileCard, b: FileCard) => compareChangedFiles(a.filePath, b.filePath);
 
   const cardByHunks = new WeakMap<GitDiffHunk[], FileCard>();
   function cardFor(f: GitFileDiff, status: string | null): FileCard {
