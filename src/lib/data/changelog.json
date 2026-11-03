@@ -1,5 +1,29 @@
 [
 	{
+		"version": "1.1.2",
+		"date": "",
+		"summary": {
+			"en": "The git profile of a project is fixed in its repository.",
+			"fr": "Le profil git d'un projet est fixé dans son dépôt."
+		},
+		"changes": [
+			{
+				"kind": "added",
+				"text": {
+					"en": "The git profile of a project is chosen when adding it, in the identity step, and later in its settings (Identity tab), as well as from the commit form of the Git view.",
+					"fr": "Le profil git d'un projet se choisit à son ajout, à l'étape d'identité, puis dans ses réglages (onglet Identité), en plus du formulaire de commit de la vue Git."
+				}
+			},
+			{
+				"kind": "changed",
+				"text": {
+					"en": "The git profile of a project is written into its repository configuration (user.name and user.email), so every commit of the project carries it, from Cairn, a terminal or a coding CLI, instead of only the commits made from the Git view. Picking the default takes back what the profile wrote and leaves an identity set by hand alone; editing a profile updates the projects using it.",
+					"fr": "Le profil git d'un projet est inscrit dans la configuration de son dépôt (user.name et user.email) : chaque commit du projet le porte, depuis Cairn, un terminal ou un CLI de code, et non plus seulement les commits faits depuis la vue Git. Revenir au défaut retire ce que le profil avait inscrit et laisse intacte une identité posée à la main ; modifier un profil met à jour les projets qui l'utilisent."
+				}
+			}
+		]
+	},
+	{
 		"version": "1.1.1",
 		"date": "2026-10-18",
 		"summary": {
