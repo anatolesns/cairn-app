@@ -1,5 +1,22 @@
 [
 	{
+		"version": "1.1.2",
+		"date": "",
+		"summary": {
+			"en": "The settings are one click away from the workspace sidebar.",
+			"fr": "Les réglages sont à un clic depuis la barre latérale du projet."
+		},
+		"changes": [
+			{
+				"kind": "added",
+				"text": {
+					"en": "A Settings button at the bottom of the workspace sidebar, under Terminal and Tools, opens the app settings; it stays available when no instance is open.",
+					"fr": "Un bouton Paramètres en bas de la barre latérale du projet, sous Terminal et Outils, ouvre les réglages de l'application ; il reste disponible quand aucune instance n'est ouverte."
+				}
+			}
+		]
+	},
+	{
 		"version": "1.1.1",
 		"date": "2026-10-18",
 		"summary": {
